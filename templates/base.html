@@ -9,6 +9,7 @@
 <body>
 
     <a href="{% url 'index' %}">Home</a>
+    <a href="{% url 'messagerie' %}">Chat</a>
 
     {% if user.is_authenticated %}
         {{ user.username }}

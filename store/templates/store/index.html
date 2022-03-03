@@ -13,6 +13,27 @@
 
 <div>
     <h2>Créer un produit</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title">
+        </p>
+        <p>
+            <label for="desc">Description</label>
+            <input type="text" name="desc" id="desc">
+        </p>
+        <p>
+            <label for="price">Price</label>
+            <input type="text" name="price" id="price">
+        </p>
+        <p>
+            <label for="quantity">Stock</label>
+            <input type="text" name="quantity" id="quantity">
+        </p>
+
+        <button type="submit">Create product</button>
+    </form>
 </div>
 
 {% endblock %}

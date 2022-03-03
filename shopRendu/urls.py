@@ -19,6 +19,7 @@ from store.views import index, product_detail
 from django.conf.urls.static import static
 from shopRendu import settings
 from login.views import signup, logout_user, login_user
+from messagerie.views import messagerie
 
 urlpatterns = [
     path('', index, name='index'),
@@ -27,4 +28,5 @@ urlpatterns = [
     path('login/', login_user, name="login"),
     path('logout/', logout_user, name="logout"),
     path('product/<str:slug>', product_detail, name="product"),
+    path('messagerie/', messagerie, name="messagerie")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
