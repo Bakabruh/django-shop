@@ -8,4 +8,6 @@
 <p>{{ product.desc }}</p>
 <p>{{ product.quantity }}</p>
 
+<a href="{% url 'delete_product' product.id %}">Delete</a>
+
 {% endblock %}
