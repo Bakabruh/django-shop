@@ -9,5 +9,6 @@
 <p>{{ product.quantity }}</p>
 
 <a href="{% url 'delete_product' product.id %}">Delete</a>
+<a href="{% url 'purchase' product.slug %}">Purchase</a>
 
 {% endblock %}

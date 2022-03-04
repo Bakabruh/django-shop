@@ -3,6 +3,7 @@ from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
+from store.forms import ProductForm
 from .models import Product
 
 def index(request):
@@ -23,3 +24,21 @@ def delete_product(request, id):
         return redirect('index')
 
     return render(request, 'store/delete.html', context={"product": product})
+
+def create_view(request):
+    context ={}
+ 
+    form = ProductForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+         
+    context['form']= form
+    return render(request, "store/create.html", context)
+
+def purchase(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+
+    if request.method == 'POST':
+        product.quantity -= 1
+
+    return render(request, 'store/purchase.html', context={"product": product})

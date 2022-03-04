@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from store.views import index, product_detail, delete_product
+from store.views import index, product_detail, delete_product, purchase, create_view
 from django.conf.urls.static import static
 from shopRendu import settings
 from login.views import signup, logout_user, login_user
@@ -27,7 +27,9 @@ urlpatterns = [
     path('signup/', signup, name="signup"),
     path('login/', login_user, name="login"),
     path('logout/', logout_user, name="logout"),
+    path('create/', create_view, name='create_view'),
     path('product/<str:slug>', product_detail, name="product"),
     path('delete/<int:id>', delete_product, name="delete_product"),
+    path('product/<str:slug>', purchase, name="purchase"),
     path('messagerie/', messagerie, name="messagerie")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
