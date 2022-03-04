@@ -12,8 +12,10 @@
                     <div class="card-body">
                     <h5 class="card-title">{{ product.title }}</h5>
                     <p class="card-text">{{ product.desc }}</p>
-                    <p class="card-text">Price: {{ product.price }}</p>
-                    <p class="card-text">Stock: {{ product.quantity }}</p>
+                    <div class="d-flex justify-content-start">
+                        <p class="card-text text-success">{{ product.price }}€</p>
+                        <p class="card-text ml-5">Quantité: <span class="text-info">{{ product.quantity }}</span></p>
+                    </div>
                     <a href="{% url 'product' product.slug %}" class="btn btn-primary">View</a>
                     </div>
                 </div>
@@ -22,6 +24,37 @@
     </div>
 </div>
 
-<a href="{% url 'create_view' %}">Créer un produit</a>
+<div class="d-flex flex-column align-items-center justify-content-center bg-dark py-3 mt-5">
+    <h2 class="text-light">Créer un produit</h2>
+    <form action="{% url 'create_view' %}" method="POST">
+        {% csrf_token %}
+        <p>
+            <label class="text-light" for="title">Title</label>
+            <input type="text" name="title" id="title">
+        </p>
+        <p>
+            <label class="text-light" for="slug">Slug</label>
+            <input type="text" name="slug" id="slug">
+        </p>
+        <p>
+            <label class="text-light" for="desc">Description</label>
+            <input type="text" name="desc" id="desc">
+        </p>
+        <p>
+            <label class="text-light" for="price">Price</label>
+            <input type="text" name="price" id="price">
+        </p>
+        <p>
+            <label class="text-light" for="quantity">Stock</label>
+            <input type="text" name="quantity" id="quantity">
+        </p>
+        <p>
+            <label class="text-light" for="image">Image</label>
+            <input class="text-light" type="file" name="image" id="image" accept="image/png, image/jpeg">
+        </p>
+
+        <button class="btn btn-primary" type="submit">Create product</button>
+    </form>
+</div>
 
 {% endblock %}

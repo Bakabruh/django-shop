@@ -25,15 +25,30 @@ def delete_product(request, id):
 
     return render(request, 'store/delete.html', context={"product": product})
 
-def create_view(request):
-    context ={}
+# def create_view(request):
+#     context ={}
  
-    form = ProductForm(request.POST or None)
-    if form.is_valid():
-        form.save()
+#     form = ProductForm(request.POST or None)
+#     if form.is_valid():
+#         form.save()
          
-    context['form']= form
-    return render(request, "store/create.html", context)
+#     context['form']= form
+#     return render(request, "store/index.html", context)
+
+def create_view(request):
+    if request.method == "POST":
+        product = Product.objects.create(
+            title=request.POST['title'],
+            slug=request.POST['slug'],
+            desc=request.POST['desc'],
+            image='products/' + request.POST['image'],
+            price=request.POST['price'],
+            quantity=request.POST['quantity'],
+        )
+        product.save()
+
+    print("Le produit: ", product)
+    return redirect('index')
 
 def purchase(request, slug):
     product = get_object_or_404(Product, slug=slug)
